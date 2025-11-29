@@ -152,6 +152,36 @@ function animateCounter(element, target, duration = 2000) {
     }, 16);
 }
 
+// Fetch Real Stats from Database
+async function fetchRealStats() {
+    try {
+        const response = await fetch('/api/apps');
+        const data = await response.json();
+        
+        if (data.apps && Array.isArray(data.apps)) {
+            const totalApps = data.apps.length;
+            const totalDownloads = data.apps.reduce((sum, app) => sum + (app.download_count || 0), 0);
+            
+            // Update data-count attributes
+            const appsElement = document.getElementById('totalApps');
+            const downloadsElement = document.getElementById('totalDownloads');
+            
+            if (appsElement) appsElement.setAttribute('data-count', totalApps);
+            if (downloadsElement) downloadsElement.setAttribute('data-count', totalDownloads);
+        }
+    } catch (error) {
+        console.error('Error fetching stats:', error);
+        // Set default values if fetch fails
+        const appsElement = document.getElementById('totalApps');
+        const downloadsElement = document.getElementById('totalDownloads');
+        if (appsElement) appsElement.setAttribute('data-count', '0');
+        if (downloadsElement) downloadsElement.setAttribute('data-count', '0');
+    }
+}
+
+// Call fetchRealStats on page load
+fetchRealStats();
+
 // Initialize counters when they come into view
 const statNumbers = document.querySelectorAll('.stat-number');
 const statObserver = new IntersectionObserver((entries) => {
