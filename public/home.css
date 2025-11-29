@@ -382,7 +382,9 @@ nav.show ~ .nav-overlay {
     z-index: 2;
     max-width: 900px;
     margin: 0 auto;
+    text-align: center;
     animation: fadeInUp 1s ease-out;
+    transform: none !important;
 }
 
 @keyframes fadeInUp {
@@ -394,6 +396,16 @@ nav.show ~ .nav-overlay {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Fix untuk menghilangkan tilt effect yang bikin text miring */
+.hero-content *,
+.hero h1,
+.hero p,
+.hero-badge,
+.hero-description {
+    transform: none !important;
+    text-align: center !important;
 }
 
 .hero-badge {
@@ -420,12 +432,16 @@ nav.show ~ .nav-overlay {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     animation: fadeInUp 1s ease-out 0.2s both;
+    text-align: center;
+    transform: none !important;
 }
 
 .hero p {
     font-size: 1.35rem;
     margin-bottom: 48px;
     opacity: 0.85;
+    text-align: center;
+    transform: none !important;
     max-width: 680px;
     margin-left: auto;
     margin-right: auto;
