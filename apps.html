@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="theme-color" content="#0f172a">
+    
+    <style>
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        body {
+            overflow-x: hidden;
+        }
+    </style>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Aplikasi | Niconve</title>
+    <meta name="description" content="Jelajahi koleksi lengkap aplikasi Android premium kami yang dirancang untuk edukasi, hiburan, dan produktivitas.">
+    <meta name="keywords" content="aplikasi android, aplikasi premium, aplikasi mobile, niconve, download">
+    <meta name="author" content="Niconve">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Aplikasi | Niconve">
+    <meta property="og:description" content="Jelajahi koleksi lengkap aplikasi Android premium kami">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://niconve.com/apps">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <i class="fas fa-cloud"></i>
+                <span>Niconve</span>
+            </div>
+            <div class="loading-progress">
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-cloud"></i>
+                    Niconve
+                </div>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html" class="nav-link">Beranda</a></li>
+                        <li><a href="apps.html" class="nav-link active">Aplikasi</a></li>
+                        <li><a href="index.html#features" class="nav-link">Fitur</a></li>
+                        <li><a href="index.html#enterprise" class="nav-link">Enterprise</a></li>
+                        <li><a href="index.html#contact" class="nav-link">Kontak</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <button class="btn-secondary" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="btn-primary" id="getStartedBtn">
+                        Mulai Sekarang
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Apps Hero Section -->
+    <section class="apps-hero" id="apps-hero">
+        <div class="container">
+            <div class="apps-hero-content">
+                <div class="hero-text-wrapper fade-in-up">
+                    <h1>Aplikasi Kami</h1>
+                    <p>Temukan aplikasi Android premium yang dirancang untuk meningkatkan pengalaman digital Anda</p>
+                </div>
+                
+                <!-- Search & Filter -->
+                <div class="apps-search">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchApps" placeholder="Cari aplikasi...">
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">Semua Aplikasi</button>
+                        <button class="filter-btn" data-filter="available">Tersedia</button>
+                        <button class="filter-btn" data-filter="coming-soon">Segera Hadir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured App Section -->
+    <section class="featured-app-section" id="featured-apps">
+        <div class="container">
+            <div class="section-title fade-in-up">
+                <span class="section-badge">Unggulan</span>
+                <h2>Tersedia Sekarang</h2>
+                <p class="section-subtitle">Aplikasi unggulan kami siap untuk diunduh</p>
+            </div>
+            
+            <div class="app-card featured fade-in" data-app="delinox" data-status="available">
+                <div class="app-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 120px; height: 120px; filter: drop-shadow(0 4px 20px rgba(0,0,0,0.3));">
+                        <path d="M280 192h-96v-48c0-26.51 21.49-48 48-48h48c26.51 0 48 21.49 48 48v48h-48z" fill="white" opacity="0.9"/>
+                        <rect x="120" y="192" width="272" height="224" rx="12" fill="white"/>
+                        <rect x="140" y="240" width="232" height="8" rx="4" fill="#667eea"/>
+                        <rect x="140" y="268" width="232" height="8" rx="4" fill="#667eea"/>
+                        <rect x="140" y="296" width="232" height="8" rx="4" fill="#667eea"/>
+                        <path d="M256 144c-17.67 0-32 14.33-32 32h64c0-17.67-14.33-32-32-32z" fill="white"/>
+                        <circle cx="256" cy="352" r="24" fill="#667eea"/>
+                        <path d="M256 328v-48" stroke="#667eea" stroke-width="8" stroke-linecap="round"/>
+                    </svg>
+                    <div class="app-badge">Tersedia Sekarang</div>
+                </div>
+                <div class="app-content">
+                    <div class="app-header">
+                        <h3>Delinox</h3>
+                        <div class="app-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.9</span>
+                            <span class="rating-count">(Rilis Baru)</span>
+                        </div>
+                    </div>
+                    <p>Aplikasi edukasi modern dengan fitur pembelajaran interaktif, tracking progress, dan konten berkualitas tinggi. Dirancang khusus untuk pengalaman belajar yang efektif dan menyenangkan.</p>
+                    <div class="app-features">
+                        <span class="feature-tag">Pembelajaran Interaktif</span>
+                        <span class="feature-tag">Pelacakan Progress</span>
+                        <span class="feature-tag">Konten Premium</span>
+                        <span class="feature-tag">Mudah Digunakan</span>
+                    </div>
+                    <div class="app-meta">
+                        <div class="price-section">
+                            <div class="app-price">Gratis</div>
+                            <div class="price-note">Gratis selamanya</div>
+                        </div>
+                        <div class="action-section">
+                            <div class="app-status status-available">Siap Diunduh</div>
+                            <button class="btn-download" data-app="delinox">
+                                <i class="fas fa-download"></i>
+                                Unduh APK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Apps Section -->
+    <section class="apps-grid-section" id="coming-soon-apps">
+        <div class="container">
+            <div class="section-title fade-in-up">
+                <span class="section-badge">Pipeline</span>
+                <h2>Segera Hadir</h2>
+                <p class="section-subtitle">Aplikasi baru yang menarik sedang dalam pengembangan</p>
+            </div>
+            
+            <div class="apps-grid">
+                <div class="app-card fade-in coming-soon-card" data-status="coming-soon">
+                    <div class="app-image" style="background: linear-gradient(135deg, #805ad5, #6b46c1);">
+                        <i class="fas fa-headphones"></i>
+                        <div class="coming-badge">Segera Hadir</div>
+                    </div>
+                    <div class="app-content">
+                        <div class="app-header">
+                            <h3>Quiet Travails</h3>
+                        </div>
+                        <p>Nikmati pengalaman audio berkualitas tinggi dengan pemutar musik dan podcast canggih kami yang dilengkapi rekomendasi berbasis AI dan dukungan audio lossless.</p>
+                        <div class="app-features">
+                            <span class="feature-tag">Audio Lossless</span>
+                            <span class="feature-tag">Rekomendasi AI</span>
+                        </div>
+                        <div class="app-meta">
+                            <div class="app-price">Akan Diumumkan</div>
+                            <div class="app-status status-coming">Segera Hadir</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="app-card fade-in coming-soon-card" data-status="coming-soon">
+                    <div class="app-image" style="background: linear-gradient(135deg, #0bc5ea, #00b5d8);">
+                        <i class="fas fa-star"></i>
+                        <div class="coming-badge">Segera Hadir</div>
+                    </div>
+                    <div class="app-content">
+                        <div class="app-header">
+                            <h3>Top Rated</h3>
+                        </div>
+                        <p>Temukan dan beri rating tempat-tempat terbaik di sekitar Anda dengan platform review berbasis komunitas yang didukung machine learning dan feedback pengguna terverifikasi.</p>
+                        <div class="app-features">
+                            <span class="feature-tag">Review AI</span>
+                            <span class="feature-tag">Pengguna Terverifikasi</span>
+                        </div>
+                        <div class="app-meta">
+                            <div class="app-price">Akan Diumumkan</div>
+                            <div class="app-status status-coming">Segera Hadir</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="app-card fade-in coming-soon-card" data-status="coming-soon">
+                    <div class="app-image" style="background: linear-gradient(135deg, #f6ad55, #ed8936);">
+                        <i class="fas fa-umbrella-beach"></i>
+                        <div class="coming-badge">Segera Hadir</div>
+                    </div>
+                    <div class="app-content">
+                        <div class="app-header">
+                            <h3>Beechfront</h3>
+                        </div>
+                        <p>Pendamping pantai utama Anda dengan informasi pasang surut real-time, prakiraan cuaca, saran aktivitas berbasis AI, dan peringatan keselamatan.</p>
+                        <div class="app-features">
+                            <span class="feature-tag">Data Real-time</span>
+                            <span class="feature-tag">Peringatan Keselamatan</span>
+                        </div>
+                        <div class="app-meta">
+                            <div class="app-price">Akan Diumumkan</div>
+                            <div class="app-status status-coming">Segera Hadir</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="app-card fade-in coming-soon-card" data-status="coming-soon">
+                    <div class="app-image" style="background: linear-gradient(135deg, #48bb78, #38a169);">
+                        <i class="fas fa-seedling"></i>
+                        <div class="coming-badge">Segera Hadir</div>
+                    </div>
+                    <div class="app-content">
+                        <div class="app-header">
+                            <h3>Farmhouse</h3>
+                        </div>
+                        <p>Alat manajemen dan perencanaan pertanian untuk petani modern dengan optimasi tanaman berbasis AI dan pelacakan cuaca.</p>
+                        <div class="app-features">
+                            <span class="feature-tag">Manajemen Tanaman</span>
+                            <span class="feature-tag">Optimasi AI</span>
+                        </div>
+                        <div class="app-meta">
+                            <div class="app-price">Akan Diumumkan</div>
+                            <div class="app-status status-coming">Segera Hadir</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="app-card fade-in coming-soon-card" data-status="coming-soon">
+                    <div class="app-image" style="background: linear-gradient(135deg, #ed8936, #dd6b20);">
+                        <i class="fas fa-city"></i>
+                        <div class="coming-badge">Segera Hadir</div>
+                    </div>
+                    <div class="app-content">
+                        <div class="app-header">
+                            <h3>City Explorer</h3>
+                        </div>
+                        <p>Penemuan kota dan pengalaman lokal untuk penduduk kota dengan navigasi berbasis AR dan rekomendasi komunitas.</p>
+                        <div class="app-features">
+                            <span class="feature-tag">Navigasi AR</span>
+                            <span class="feature-tag">Panduan Lokal</span>
+                        </div>
+                        <div class="app-meta">
+                            <div class="app-price">Akan Diumumkan</div>
+                            <div class="app-status status-coming">Segera Hadir</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="app-card fade-in coming-soon-card" data-status="coming-soon">
+                    <div class="app-image" style="background: linear-gradient(135deg, #38b2ac, #319795);">
+                        <i class="fas fa-palm-tree"></i>
+                        <div class="coming-badge">Segera Hadir</div>
+                    </div>
+                    <div class="app-content">
+                        <div class="app-header">
+                            <h3>Tropical</h3>
+                        </div>
+                        <p>Perencanaan liburan pulau dan panduan untuk liburan tropis dengan integrasi cuaca real-time dan pemesanan aktivitas.</p>
+                        <div class="app-features">
+                            <span class="feature-tag">Perencanaan Perjalanan</span>
+                            <span class="feature-tag">Peringatan Cuaca</span>
+                        </div>
+                        <div class="app-meta">
+                            <div class="app-price">Akan Diumumkan</div>
+                            <div class="app-status status-coming">Segera Hadir</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="apps-newsletter" id="newsletter">
+        <div class="container">
+            <div class="newsletter-content fade-in-up">
+                <div class="newsletter-text">
+                    <h2>Tetap Update</h2>
+                    <p>Dapatkan notifikasi saat aplikasi baru dirilis</p>
+                </div>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Masukkan alamat email Anda">
+                    <button type="submit">
+                        <span>Berlangganan</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tentang Niconve</h3>
+                    <p>Kami menciptakan aplikasi Android inovatif yang meningkatkan kehidupan sehari-hari melalui teknologi canggih, desain elegan, dan pengalaman yang berfokus pada pengguna.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tautan Cepat</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Beranda</a></li>
+                        <li><a href="apps.html"><i class="fas fa-chevron-right"></i> Aplikasi</a></li>
+                        <li><a href="index.html#features"><i class="fas fa-chevron-right"></i> Fitur</a></li>
+                        <li><a href="index.html#enterprise"><i class="fas fa-chevron-right"></i> Enterprise</a></li>
+                        <li><a href="index.html#contact"><i class="fas fa-chevron-right"></i> Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Sumber Daya</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Dokumentasi</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Referensi API</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Panduan Developer</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Pusat Dukungan</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Hubungi Kami</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:contact@niconve.com"><i class="fas fa-envelope"></i> contact@niconve.com</a></li>
+                        <li><a href="tel:+15551234567"><i class="fas fa-phone"></i> +1 (555) 123-4567</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Silicon Valley, CA</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Niconve. Hak cipta dilindungi. | Aplikasi Android Premium | <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat Layanan</a> | <a href="admin.html" style="opacity: 0.3;">Admin</a> | Alden Prabaswara</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Download Modal -->
+    <div class="download-modal" id="downloadModal">
+        <div class="download-modal-content">
+            <button class="modal-close" onclick="closeDownloadModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-icon">
+                <i class="fas fa-download"></i>
+            </div>
+            
+            <h2 id="modalAppName">Unduh Aplikasi</h2>
+            
+            <div class="modal-info">
+                <div class="info-item">
+                    <i class="fas fa-file-archive"></i>
+                    <span>File: <strong id="modalFileName">app.apk</strong></span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-hdd"></i>
+                    <span>Ukuran: <strong id="modalFileSize">0 MB</strong></span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Diperbarui: <strong id="modalUploadDate">Baru-baru ini</strong></span>
+                </div>
+            </div>
+            
+            <div class="modal-warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Aktifkan "Instal dari Sumber Tidak Dikenal" di pengaturan Android Anda sebelum menginstal.</p>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn-modal-cancel" onclick="closeDownloadModal()">
+                    Batal
+                </button>
+                <button class="btn-modal-download" id="confirmDownload">
+                    <i class="fas fa-download"></i>
+                    Unduh Sekarang
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-cloud"></i>
+                Niconve
+            </div>
+            <button class="close-sidebar" id="closeSidebar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
+                <li><a href="apps.html" class="active"><i class="fas fa-mobile-alt"></i> Aplikasi</a></li>
+                <li><a href="index.html#features"><i class="fas fa-star"></i> Fitur</a></li>
+                <li><a href="index.html#enterprise"><i class="fas fa-building"></i> Enterprise</a></li>
+                <li><a href="index.html#contact"><i class="fas fa-envelope"></i> Kontak</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Scripts -->
+    <script src="home.js"></script>
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#' || href === '') return;
+                
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    const headerOffset = 100;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all fade-in-up elements
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+        
+        // Lazy load app cards
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    cardObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.app-card').forEach(card => {
+            cardObserver.observe(card);
+        });
+        
+        // Search functionality with debounce
+        let searchTimeout;
+        document.getElementById('searchApps').addEventListener('input', function(e) {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                const searchTerm = e.target.value.toLowerCase();
+                const appCards = document.querySelectorAll('.app-card');
+                
+                appCards.forEach(card => {
+                    const appName = card.querySelector('h3').textContent.toLowerCase();
+                    const appDesc = card.querySelector('p').textContent.toLowerCase();
+                    
+                    if (appName.includes(searchTerm) || appDesc.includes(searchTerm)) {
+                        card.style.display = '';
+                        card.style.animation = 'fadeIn 0.3s ease';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }, 300);
+        });
+        
+        // Filter functionality with smooth transitions
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active button
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                const appCards = document.querySelectorAll('.app-card');
+                
+                // Fade out first
+                appCards.forEach(card => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.95)';
+                });
+                
+                // Then filter and fade in
+                setTimeout(() => {
+                    appCards.forEach(card => {
+                        if (filter === 'all') {
+                            card.style.display = '';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'scale(1)';
+                            }, 50);
+                        } else if (filter === 'available') {
+                            if (card.dataset.status === 'available') {
+                                card.style.display = '';
+                                setTimeout(() => {
+                                    card.style.opacity = '1';
+                                    card.style.transform = 'scale(1)';
+                                }, 50);
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        } else if (filter === 'coming-soon') {
+                            if (card.classList.contains('coming-soon-card')) {
+                                card.style.display = '';
+                                setTimeout(() => {
+                                    card.style.opacity = '1';
+                                    card.style.transform = 'scale(1)';
+                                }, 50);
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }
+                    });
+                    
+                    // Smooth scroll to apps section
+                    const appsSection = document.querySelector('.apps-grid-section');
+                    if (appsSection && filter !== 'all') {
+                        const headerOffset = 100;
+                        const elementPosition = appsSection.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 200);
+            });
+        });
+        
+        // Add scroll progress indicator
+        const createScrollIndicator = () => {
+            const indicator = document.createElement('div');
+            indicator.className = 'scroll-progress';
+            document.body.appendChild(indicator);
+            
+            window.addEventListener('scroll', () => {
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight - windowHeight;
+                const scrolled = window.pageYOffset;
+                const progress = (scrolled / documentHeight) * 100;
+                
+                indicator.style.width = progress + '%';
+            }, { passive: true });
+        };
+        
+        createScrollIndicator();
+    </script>
+</body>
+</html>
