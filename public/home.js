@@ -55,27 +55,25 @@ window.addEventListener('scroll', () => {
     }
 }, { passive: true });
 
-// Particle System - Device-Optimized
+// Particle System - Ultra Optimized
 function createParticles() {
     const container = document.getElementById('particleContainer');
     if (!container) return;
     
-    // Skip particles on very low-end devices
-    if (shouldReduceAnimations && window.innerWidth < 480) {
+    // Disable particles on low-end devices completely
+    if (shouldReduceAnimations) {
         container.style.display = 'none';
         return;
     }
     
-    // Adaptive particle count based on device capability
+    // Drastically reduced particle count for performance
     let particleCount;
-    if (window.innerWidth < 480) {
-        particleCount = 8;
-    } else if (window.innerWidth < 768) {
-        particleCount = 15;
-    } else if (shouldReduceAnimations) {
-        particleCount = 20;
+    if (window.innerWidth < 768) {
+        particleCount = 0; // No particles on mobile
+    } else if (window.innerWidth < 1024) {
+        particleCount = 10; // Minimal on tablet
     } else {
-        particleCount = 30;
+        particleCount = 15; // Reduced on desktop
     }
     
     for (let i = 0; i < particleCount; i++) {
@@ -116,13 +114,18 @@ function revealOnScroll() {
     });
 }
 
-// Tilt Effect for Cards
+// Tilt Effect for Cards - Disabled for Performance
 function initTiltEffect() {
+    // Tilt effect disabled to improve performance
+    // Only enable on high-end devices
+    if (shouldReduceAnimations || window.innerWidth < 1024) return;
+    
     const tiltCards = document.querySelectorAll('.tilt-card');
+    if (tiltCards.length > 10) return; // Skip if too many elements
     
     tiltCards.forEach(card => {
-        card.addEventListener('mousemove', handleTilt);
-        card.addEventListener('mouseleave', resetTilt);
+        card.addEventListener('mousemove', handleTilt, { passive: true });
+        card.addEventListener('mouseleave', resetTilt, { passive: true });
     });
 }
 
@@ -135,21 +138,22 @@ function handleTilt(e) {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
     
-    const rotateX = (y - centerY) / 10;
-    const rotateY = (centerX - x) / 10;
+    const rotateX = (y - centerY) / 15; // Reduced intensity
+    const rotateY = (centerX - x) / 15;
     
-    card.style.setProperty('--rotate-x', rotateX + 'deg');
-    card.style.setProperty('--rotate-y', rotateY + 'deg');
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 }
 
 function resetTilt(e) {
     const card = e.currentTarget;
-    card.style.setProperty('--rotate-x', '0deg');
-    card.style.setProperty('--rotate-y', '0deg');
+    card.style.transform = '';
 }
 
-// Magnetic Button Effect
+// Magnetic Button Effect - Optimized
 function initMagneticButtons() {
+    // Disable on mobile and low-end devices
+    if (window.innerWidth < 1024 || shouldReduceAnimations) return;
+    
     const magneticBtns = document.querySelectorAll('.magnetic-btn');
     
     magneticBtns.forEach(btn => {
@@ -158,31 +162,26 @@ function initMagneticButtons() {
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
             
-            this.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-        });
+            this.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`; // Reduced intensity
+        }, { passive: true });
         
         btn.addEventListener('mouseleave', function() {
             this.style.transform = '';
-        });
+        }, { passive: true });
     });
 }
 
-// Parallax Effect
+// Parallax Effect - Disabled for Performance
 function initParallax() {
-    const parallaxElements = document.querySelectorAll('.parallax-layer');
-    
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        
-        parallaxElements.forEach(element => {
-            const speed = element.getAttribute('data-speed') || 0.5;
-            element.style.transform = `translateY(${scrolled * speed}px)`;
-        });
-    });
+    // Parallax disabled to improve scroll performance
+    return;
 }
 
-// Cursor Follower Effect - Optimized
+// Cursor Follower Effect - Disabled for Performance
 function initCursorFollower() {
+    // Cursor follower disabled completely for better performance
+    return;
+    
     // Skip on mobile and low-end devices
     if (window.innerWidth < 768 || navigator.hardwareConcurrency < 4) return;
     

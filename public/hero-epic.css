@@ -17,8 +17,7 @@
     position: absolute;
     border-radius: 50%;
     filter: blur(80px);
-    opacity: 0.6;
-    animation: floatOrb 20s ease-in-out infinite;
+    opacity: 0.4;
 }
 
 .orb-1 {
@@ -86,8 +85,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    animation: shimmerBadge 3s ease-in-out infinite;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
 }
 
 @keyframes shimmerBadge {
@@ -99,47 +97,18 @@
     }
 }
 
-.badge-pulse {
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    border-radius: 50px;
-    border: 2px solid rgba(102, 126, 234, 0.8);
-    animation: pulseRing 2s ease-out infinite;
-}
 
-@keyframes pulseRing {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1.15);
-        opacity: 0;
-    }
-}
+
+
 
 .badge-icon {
     font-size: 22px;
-    animation: bounceIcon 2s ease-in-out infinite;
     filter: drop-shadow(0 2px 8px rgba(102, 126, 234, 0.5));
     position: relative;
     z-index: 1;
 }
 
-@keyframes bounceIcon {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg);
-    }
-    25% {
-        transform: translateY(-3px) rotate(-5deg);
-    }
-    75% {
-        transform: translateY(-3px) rotate(5deg);
-    }
-}
+
 
 .badge-text {
     position: relative;
@@ -164,25 +133,13 @@
 .gradient-text {
     display: inline-block;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-    background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: shimmer 3s linear infinite;
     position: relative;
 }
 
-.gradient-text::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -10px;
-    height: 4px;
-    background: linear-gradient(90deg, transparent, #667eea, transparent);
-    border-radius: 2px;
-    animation: slideIn 1s ease-out 1s backwards;
-}
+
 
 @keyframes shimmer {
     0% {
@@ -490,12 +447,10 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    border: 2px solid rgba(102, 126, 234, 0.1);
+    border: 2px solid rgba(102, 126, 234, 0.08);
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    animation: ringPulse 8s ease-in-out infinite;
-    will-change: transform, opacity;
-    backface-visibility: hidden;
+    opacity: 0.3;
 }
 
 .ring-1 {
@@ -555,9 +510,8 @@
 .orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.3;
-    animation: orbFloat 15s ease-in-out infinite;
+    filter: blur(60px);
+    opacity: 0.2;
 }
 
 .orb-purple {

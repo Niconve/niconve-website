@@ -86,19 +86,17 @@
         <!-- Gradient Mesh Animation -->
         <div class="gradient-mesh"></div>
         
-        <!-- Morphing Blobs -->
-        <div class="blob" style="top: 10%; left: 5%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(102, 126, 234, 0.15), transparent);"></div>
-        <div class="blob" style="top: 50%; right: 10%; width: 350px; height: 350px; background: radial-gradient(circle, rgba(168, 85, 247, 0.15), transparent); animation-delay: -5s;"></div>
-        <div class="blob" style="bottom: 10%; left: 30%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(236, 72, 153, 0.15), transparent); animation-delay: -10s;"></div>
+        <!-- Static Background Orbs (No Animation for Performance) -->
+        <div class="static-orb" style="top: 10%; left: 5%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(102, 126, 234, 0.1), transparent); filter: blur(60px);"></div>
+        <div class="static-orb" style="top: 50%; right: 10%; width: 350px; height: 350px; background: radial-gradient(circle, rgba(168, 85, 247, 0.1), transparent); filter: blur(60px);"></div>
         
         <div class="container">
             <div class="hero-content">
-                <div class="hero-badge glass-card glow-pulse reveal">
+                <div class="hero-badge glass-card reveal">
                     <span class="badge-icon">🚀</span>
                     <span class="badge-text">Aplikasi Android Premium</span>
-                    <div class="badge-pulse"></div>
                 </div>
-                <h1 class="reveal animated-gradient-text" data-delay="100">Transformasikan Pengalaman Digital Anda</h1>
+                <h1 class="reveal gradient-text" data-delay="100">Transformasikan Pengalaman Digital Anda</h1>
                 <p class="hero-description reveal" data-delay="200">Temukan koleksi aplikasi Android inovatif kami yang dirancang untuk meningkatkan pengalaman digital Anda dengan fitur canggih, kecerdasan berbasis AI, dan desain elegan yang menetapkan standar baru dalam teknologi mobile.</p>
                 <div class="hero-actions reveal" data-delay="300">
                     <a href="apps.html" class="cta-button magnetic-btn ripple">
@@ -118,7 +116,7 @@
                             <i class="fas fa-mobile-alt"></i>
                         </div>
                         <div class="stat-content">
-                            <div class="stat-number animated-gradient-text" id="totalApps" data-count="0">0</div>
+                            <div class="stat-number" id="totalApps" data-count="0">0</div>
                             <div class="stat-label">Total Aplikasi</div>
                         </div>
                     </div>
@@ -127,7 +125,7 @@
                             <i class="fas fa-download"></i>
                         </div>
                         <div class="stat-content">
-                            <div class="stat-number animated-gradient-text" id="totalDownloads" data-count="0">0</div>
+                            <div class="stat-number" id="totalDownloads" data-count="0">0</div>
                             <div class="stat-label">Total Download</div>
                         </div>
                     </div>
@@ -165,19 +163,14 @@
             <div class="ring ring-2"></div>
         </div>
         
-        <!-- Glowing Orbs -->
-        <div class="glowing-orbs">
-            <div class="orb orb-purple"></div>
-            <div class="orb orb-blue"></div>
-            <div class="orb orb-pink"></div>
-        </div>
+
     </section>
 
     <!-- Features Section -->
     <section class="features" id="features">
         <div class="container">
             <div class="section-title reveal">
-                <h2 class="animated-gradient-text">Mengapa Memilih Niconve</h2>
+                <h2 class="gradient-text">Mengapa Memilih Niconve</h2>
                 <p class="section-subtitle">Fitur premium dan kualitas luar biasa di setiap aplikasi yang kami buat</p>
             </div>
             
@@ -191,7 +184,7 @@
                 </div>
                 
                 <div class="feature-card glass-card tilt-card reveal" data-delay="150">
-                    <div class="feature-icon glow-pulse">
+                    <div class="feature-icon">
                         <i class="fas fa-bolt"></i>
                     </div>
                     <h3>Sangat Cepat</h3>
@@ -207,7 +200,7 @@
                 </div>
                 
                 <div class="feature-card glass-card tilt-card reveal" data-delay="250">
-                    <div class="feature-icon glow-pulse">
+                    <div class="feature-icon">
                         <i class="fas fa-sync-alt"></i>
                     </div>
                     <h3>Update Berkala</h3>
