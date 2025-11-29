@@ -503,9 +503,9 @@ nav.show ~ .nav-overlay {
 
 .hero-stats {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
-    max-width: 800px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px;
+    max-width: 600px;
     margin: 0 auto;
     animation: fadeInUp 1s ease-out 0.8s both;
 }
@@ -1938,8 +1938,8 @@ footer::before {
     }
     
     .hero-stats {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 25px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
     }
     
     .stat-number {
@@ -2163,7 +2163,7 @@ footer::before {
     
     .hero-stats {
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+        gap: 30px;
     }
     
     .stat-number {
