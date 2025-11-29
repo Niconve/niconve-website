@@ -1,14 +1,3 @@
-// Loading Screen
-window.addEventListener('load', function() {
-    const loadingScreen = document.getElementById('loadingScreen');
-    setTimeout(() => {
-        loadingScreen.classList.add('hidden');
-        setTimeout(() => {
-            loadingScreen.style.display = 'none';
-        }, 500);
-    }, 2000);
-});
-
 // Mobile Menu Toggle
 const mobileMenu = document.querySelector('.mobile-menu');
 const nav = document.querySelector('nav');
