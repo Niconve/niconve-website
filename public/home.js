@@ -2,6 +2,19 @@
 // LEGENDARY EPIC ANIMATIONS & INTERACTIONS
 // ============================================
 
+// Debounce function for performance
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
 // Scroll Progress Bar
 function updateScrollProgress() {
     const scrollProgress = document.getElementById('scrollProgress');
@@ -18,14 +31,26 @@ scrollProgressBar.id = 'scrollProgress';
 scrollProgressBar.className = 'scroll-progress';
 document.body.appendChild(scrollProgressBar);
 
-window.addEventListener('scroll', updateScrollProgress);
+// Use requestAnimationFrame for smooth scroll updates
+let ticking = false;
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            updateScrollProgress();
+            revealOnScroll();
+            ticking = false;
+        });
+        ticking = true;
+    }
+}, { passive: true });
 
-// Particle System
+// Particle System - Optimized
 function createParticles() {
     const container = document.getElementById('particleContainer');
     if (!container) return;
     
-    const particleCount = window.innerWidth < 768 ? 30 : 60;
+    // Reduced particle count for better performance
+    const particleCount = window.innerWidth < 768 ? 15 : 30;
     
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
@@ -47,9 +72,9 @@ function createParticles() {
     }
 }
 
-// Reveal Animations on Scroll
+// Reveal Animations on Scroll - Optimized
 function revealOnScroll() {
-    const reveals = document.querySelectorAll('.reveal');
+    const reveals = document.querySelectorAll('.reveal:not(.active)');
     
     reveals.forEach(element => {
         const windowHeight = window.innerHeight;
@@ -130,9 +155,10 @@ function initParallax() {
     });
 }
 
-// Cursor Follower Effect
+// Cursor Follower Effect - Optimized
 function initCursorFollower() {
-    if (window.innerWidth < 768) return;
+    // Skip on mobile and low-end devices
+    if (window.innerWidth < 768 || navigator.hardwareConcurrency < 4) return;
     
     const follower = document.createElement('div');
     follower.className = 'cursor-follower';
