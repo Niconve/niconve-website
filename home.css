@@ -780,6 +780,29 @@ section {
     box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
 }
 
+.badge-beta {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+    box-shadow: 0 4px 15px rgba(245, 87, 108, 0.5) !important;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.feature-beta {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    border: none !important;
+}
+
+.feature-premium {
+    background: linear-gradient(135deg, #f5af19 0%, #f12711 100%);
+    color: white;
+    border: none !important;
+}
+
+.price-paid {
+    color: #f5af19;
+    font-weight: 800;
+}
+
 .app-content {
     padding: 32px;
     position: relative;

@@ -445,6 +445,97 @@
     <!-- Scripts -->
     <script src="home.js"></script>
     <script>
+        // Load Real Apps from Database
+        async function loadAppsFromDatabase() {
+            try {
+                const response = await fetch('/api/apps');
+                const data = await response.json();
+                
+                if (data.apps && data.apps.length > 0) {
+                    const appsContainer = document.querySelector('.apps-grid');
+                    
+                    // Generate HTML for each app
+                    const appsHTML = data.apps.map(app => {
+                        const isBeta = app.release_type === 'beta';
+                        const isPaid = app.is_paid;
+                        const price = isPaid ? `${app.currency || 'Rp'} ${Number(app.price).toLocaleString()}` : 'Gratis';
+                        const priceNote = isPaid ? 'Pembelian sekali' : 'Gratis selamanya';
+                        
+                        return `
+                            <div class="app-card" data-status="available">
+                                <div class="app-image">
+                                    ${app.icon_url ? `<img src="${app.icon_url}" alt="${app.name}">` : `
+                                    <svg viewBox="0 0 512 512" fill="none">
+                                        <rect width="512" height="512" rx="24" fill="#667eea"/>
+                                        <path d="M280 192h-96v-48c0-26.51 21.49-48 48-48h48c26.51 0 48 21.49 48 48v48h-48z" fill="white" opacity="0.9"/>
+                                        <rect x="120" y="192" width="272" height="224" rx="12" fill="white"/>
+                                        <rect x="140" y="240" width="232" height="8" rx="4" fill="#667eea"/>
+                                        <rect x="140" y="268" width="232" height="8" rx="4" fill="#667eea"/>
+                                        <rect x="140" y="296" width="232" height="8" rx="4" fill="#667eea"/>
+                                        <path d="M256 144c-17.67 0-32 14.33-32 32h64c0-17.67-14.33-32-32-32z" fill="white"/>
+                                        <circle cx="256" cy="352" r="24" fill="#667eea"/>
+                                        <path d="M256 328v-48" stroke="#667eea" stroke-width="8" stroke-linecap="round"/>
+                                    </svg>
+                                    `}
+                                    ${isBeta ? '<div class="app-badge badge-beta">🧪 Beta</div>' : '<div class="app-badge">Tersedia Sekarang</div>'}
+                                </div>
+                                <div class="app-content">
+                                    <div class="app-header">
+                                        <h3>${app.name}</h3>
+                                        <div class="app-rating">
+                                            <i class="fas fa-star"></i>
+                                            <span>4.9</span>
+                                            <span class="rating-count">(${app.download_count || 0} download)</span>
+                                        </div>
+                                    </div>
+                                    <p>${app.description || 'Aplikasi berkualitas tinggi dari Niconve.'}</p>
+                                    <div class="app-features">
+                                        ${isBeta ? '<span class="feature-tag feature-beta">Versi Beta</span>' : ''}
+                                        ${isPaid ? '<span class="feature-tag feature-premium">Premium</span>' : '<span class="feature-tag">Gratis</span>'}
+                                        <span class="feature-tag">Mudah Digunakan</span>
+                                        <span class="feature-tag">Update Rutin</span>
+                                    </div>
+                                    <div class="app-meta">
+                                        <div class="price-section">
+                                            <div class="app-price ${isPaid ? 'price-paid' : ''}">${price}</div>
+                                            <div class="price-note">${priceNote}</div>
+                                        </div>
+                                        <div class="action-section">
+                                            <div class="app-status status-available">Siap Diunduh</div>
+                                            <button class="btn-download" data-app-id="${app.id}" data-app-name="${app.name}">
+                                                <i class="fas fa-download"></i>
+                                                Unduh APK
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                    
+                    // Replace static content with dynamic apps
+                    appsContainer.innerHTML = appsHTML;
+                    
+                    // Re-attach download event listeners
+                    document.querySelectorAll('.btn-download').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const appId = this.dataset.appId;
+                            const appName = this.dataset.appName;
+                            // Trigger download
+                            window.location.href = `/api/download?id=${appId}`;
+                        });
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading apps:', error);
+            }
+        }
+        
+        // Load apps on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAppsFromDatabase();
+        });
+        
         // Smooth scroll for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
