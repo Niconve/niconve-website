@@ -1,5 +1,7 @@
 {
-  "version": 2,
+  "buildCommand": null,
+  "outputDirectory": null,
+  "installCommand": null,
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" }
   ],
