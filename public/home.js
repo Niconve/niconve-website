@@ -1,3 +1,184 @@
+// ============================================
+// LEGENDARY EPIC ANIMATIONS & INTERACTIONS
+// ============================================
+
+// Scroll Progress Bar
+function updateScrollProgress() {
+    const scrollProgress = document.getElementById('scrollProgress');
+    if (scrollProgress) {
+        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (window.scrollY / windowHeight) * 100;
+        scrollProgress.style.width = scrolled + '%';
+    }
+}
+
+// Create Scroll Progress Bar
+const scrollProgressBar = document.createElement('div');
+scrollProgressBar.id = 'scrollProgress';
+scrollProgressBar.className = 'scroll-progress';
+document.body.appendChild(scrollProgressBar);
+
+window.addEventListener('scroll', updateScrollProgress);
+
+// Particle System
+function createParticles() {
+    const container = document.getElementById('particleContainer');
+    if (!container) return;
+    
+    const particleCount = window.innerWidth < 768 ? 30 : 60;
+    
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const startX = Math.random() * 100;
+        const startY = Math.random() * 100;
+        const tx = (Math.random() - 0.5) * 200;
+        const ty = (Math.random() - 0.5) * 200;
+        const delay = Math.random() * 15;
+        
+        particle.style.left = startX + '%';
+        particle.style.top = startY + '%';
+        particle.style.setProperty('--tx', tx + 'px');
+        particle.style.setProperty('--ty', ty + 'px');
+        particle.style.animationDelay = delay + 's';
+        
+        container.appendChild(particle);
+    }
+}
+
+// Reveal Animations on Scroll
+function revealOnScroll() {
+    const reveals = document.querySelectorAll('.reveal');
+    
+    reveals.forEach(element => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < windowHeight - elementVisible) {
+            const delay = element.getAttribute('data-delay') || 0;
+            setTimeout(() => {
+                element.classList.add('active');
+            }, delay);
+        }
+    });
+}
+
+// Tilt Effect for Cards
+function initTiltEffect() {
+    const tiltCards = document.querySelectorAll('.tilt-card');
+    
+    tiltCards.forEach(card => {
+        card.addEventListener('mousemove', handleTilt);
+        card.addEventListener('mouseleave', resetTilt);
+    });
+}
+
+function handleTilt(e) {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateX = (y - centerY) / 10;
+    const rotateY = (centerX - x) / 10;
+    
+    card.style.setProperty('--rotate-x', rotateX + 'deg');
+    card.style.setProperty('--rotate-y', rotateY + 'deg');
+}
+
+function resetTilt(e) {
+    const card = e.currentTarget;
+    card.style.setProperty('--rotate-x', '0deg');
+    card.style.setProperty('--rotate-y', '0deg');
+}
+
+// Magnetic Button Effect
+function initMagneticButtons() {
+    const magneticBtns = document.querySelectorAll('.magnetic-btn');
+    
+    magneticBtns.forEach(btn => {
+        btn.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            this.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+        });
+        
+        btn.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+        });
+    });
+}
+
+// Parallax Effect
+function initParallax() {
+    const parallaxElements = document.querySelectorAll('.parallax-layer');
+    
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        
+        parallaxElements.forEach(element => {
+            const speed = element.getAttribute('data-speed') || 0.5;
+            element.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
+}
+
+// Cursor Follower Effect
+function initCursorFollower() {
+    if (window.innerWidth < 768) return;
+    
+    const follower = document.createElement('div');
+    follower.className = 'cursor-follower';
+    document.body.appendChild(follower);
+    
+    let mouseX = 0, mouseY = 0;
+    let followerX = 0, followerY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+    
+    function updateFollower() {
+        const dx = mouseX - followerX;
+        const dy = mouseY - followerY;
+        
+        followerX += dx * 0.1;
+        followerY += dy * 0.1;
+        
+        follower.style.left = followerX + 'px';
+        follower.style.top = followerY + 'px';
+        
+        requestAnimationFrame(updateFollower);
+    }
+    
+    updateFollower();
+    
+    // Add active class on clickable elements
+    const clickables = document.querySelectorAll('a, button, .btn-primary, .btn-secondary');
+    clickables.forEach(el => {
+        el.addEventListener('mouseenter', () => follower.classList.add('active'));
+        el.addEventListener('mouseleave', () => follower.classList.remove('active'));
+    });
+}
+
+// Initialize all epic animations
+function initEpicAnimations() {
+    createParticles();
+    revealOnScroll();
+    initTiltEffect();
+    initMagneticButtons();
+    initParallax();
+    initCursorFollower();
+}
+
 // Mobile Menu Toggle
 const mobileMenu = document.querySelector('.mobile-menu');
 const nav = document.querySelector('nav');
@@ -68,7 +249,7 @@ fadeElements.forEach(element => {
     appearOnScroll.observe(element);
 });
 
-// Header background on scroll
+// Header background on scroll with reveal animations
 window.addEventListener('scroll', function() {
     const header = document.querySelector('header');
     const backToTop = document.getElementById('backToTop');
@@ -80,6 +261,9 @@ window.addEventListener('scroll', function() {
         header.classList.remove('scrolled');
         if (backToTop) backToTop.classList.remove('visible');
     }
+    
+    // Trigger reveal animations on scroll
+    revealOnScroll();
 });
 
 // Back to Top functionality
@@ -446,6 +630,9 @@ function enhanceFloatingElements() {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize epic animations first
+    initEpicAnimations();
+    
     enhanceFloatingElements();
     setActiveNavLink();
     
