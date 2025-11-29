@@ -1,4 +1,7 @@
 {
   "version": 2,
-  "name": "niconve"
+  "name": "niconve",
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "installCommand": ""
 }
