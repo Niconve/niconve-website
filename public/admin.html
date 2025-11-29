@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#0f172a">
+    <title>Admin Panel - Niconve</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .admin-container {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .admin-header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .admin-header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .admin-content {
+            padding: 40px 32px;
+        }
+
+        .login-form, .upload-form {
+            display: none;
+        }
+
+        .login-form.active, .upload-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #334155;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .file-upload {
+            position: relative;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            background: #f8fafc;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .file-upload:hover {
+            border-color: #667eea;
+            background: #f1f5ff;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+
+        .file-upload-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 12px;
+        }
+
+        .file-upload-text {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .file-info {
+            margin-top: 16px;
+            padding: 16px;
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            border-radius: 12px;
+            display: none;
+        }
+
+        .file-info.show {
+            display: block;
+        }
+
+        .file-info strong {
+            color: #166534;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+            margin-top: 12px;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .success-message, .error-message {
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 0.95rem;
+        }
+
+        .success-message {
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            color: #166534;
+        }
+
+        .error-message {
+            background: #fef2f2;
+            border: 1px solid #fca5a5;
+            color: #991b1b;
+        }
+
+        .success-message.show, .error-message.show {
+            display: block;
+        }
+
+        .current-files {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .current-files h3 {
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            color: #334155;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .file-item-info {
+            flex: 1;
+        }
+
+        .file-item-name {
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 4px;
+        }
+
+        .file-item-size {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .file-item-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .btn-delete {
+            background: #fef2f2;
+            color: #ef4444;
+        }
+
+        .btn-delete:hover {
+            background: #fee2e2;
+            transform: scale(1.1);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 12px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 576px) {
+            .admin-content {
+                padding: 24px 20px;
+            }
+
+            .admin-header {
+                padding: 24px;
+            }
+
+            .admin-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1><i class="fas fa-shield-alt"></i> Admin Panel</h1>
+            <p>Upload dan kelola aplikasi Android</p>
+        </div>
+
+        <div class="admin-content">
+            <!-- Login Form -->
+            <form class="login-form active" id="loginForm">
+                <div class="form-group">
+                    <label for="password">Password Admin</label>
+                    <input type="password" id="password" placeholder="Masukkan password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </button>
+            </form>
+
+            <!-- Upload Form -->
+            <div class="upload-form" id="uploadForm">
+                <div class="success-message" id="successMessage"></div>
+                <div class="error-message" id="errorMessage"></div>
+
+                <form id="apkUploadForm">
+                    <div class="form-group">
+                        <label for="appName">Nama Aplikasi</label>
+                        <input type="text" id="appName" placeholder="Masukkan nama aplikasi (contoh: Delinox)" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload APK File</label>
+                        <div class="file-upload" id="fileUpload">
+                            <input type="file" id="apkFile" accept=".apk" required>
+                            <div class="file-upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <div class="file-upload-text">
+                                <strong>Klik untuk upload</strong> atau drag & drop<br>
+                                <small>APK file (max 100MB)</small>
+                            </div>
+                        </div>
+                        <div class="file-info" id="fileInfo"></div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="uploadBtn">
+                        <i class="fas fa-upload"></i>
+                        Upload APK
+                    </button>
+                </form>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Uploading file...</p>
+                </div>
+
+                <div class="current-files" id="currentFiles">
+                    <h3><i class="fas fa-folder-open"></i> File yang Tersedia</h3>
+                    <div id="fileList"></div>
+                </div>
+
+                <button class="btn btn-secondary" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple authentication (production: gunakan backend authentication)
+        const ADMIN_PASSWORD = 't1d4kt4u'; // Ganti dengan password Anda
+
+        // File storage simulation (production: gunakan server/cloud storage)
+        let uploadedFiles = JSON.parse(localStorage.getItem('niconveApks') || '{}');
+
+        // Login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('password').value;
+            
+            if (password === ADMIN_PASSWORD) {
+                document.querySelector('.login-form').classList.remove('active');
+                document.querySelector('.upload-form').classList.add('active');
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                loadFiles();
+            } else {
+                alert('Password salah!');
+            }
+        });
+
+        // Check if already logged in
+        if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+            document.querySelector('.login-form').classList.remove('active');
+            document.querySelector('.upload-form').classList.add('active');
+            loadFiles();
+        }
+
+        // File selection
+        document.getElementById('apkFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const fileInfo = document.getElementById('fileInfo');
+                const size = (file.size / (1024 * 1024)).toFixed(2);
+                
+                if (file.size > 100 * 1024 * 1024) {
+                    showError('File terlalu besar! Maksimal 100MB');
+                    this.value = '';
+                    return;
+                }
+                
+                fileInfo.innerHTML = `
+                    <strong><i class="fas fa-check-circle"></i> File dipilih:</strong><br>
+                    ${file.name} (${size} MB)
+                `;
+                fileInfo.classList.add('show');
+            }
+        });
+
+        // Upload form
+        document.getElementById('apkUploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const appName = document.getElementById('appName').value;
+            const file = document.getElementById('apkFile').files[0];
+            
+            if (!file) {
+                showError('Pilih file APK terlebih dahulu!');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('loading').classList.add('show');
+            document.getElementById('uploadBtn').disabled = true;
+
+            // Simulate upload (production: upload ke server/cloud)
+            setTimeout(() => {
+                // Convert file to base64 for storage simulation
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedFiles[appName] = {
+                        name: file.name,
+                        size: file.size,
+                        data: e.target.result,
+                        uploadDate: new Date().toISOString()
+                    };
+                    
+                    localStorage.setItem('niconveApks', JSON.stringify(uploadedFiles));
+                    
+                    // Hide loading
+                    document.getElementById('loading').classList.remove('show');
+                    document.getElementById('uploadBtn').disabled = false;
+                    
+                    // Show success
+                    showSuccess(`APK berhasil diupload untuk ${appName}!`);
+                    
+                    // Reset form
+                    document.getElementById('apkUploadForm').reset();
+                    document.getElementById('fileInfo').classList.remove('show');
+                    
+                    // Reload file list
+                    loadFiles();
+                };
+                reader.readAsDataURL(file);
+            }, 1500);
+        });
+
+        function loadFiles() {
+            const fileList = document.getElementById('fileList');
+            uploadedFiles = JSON.parse(localStorage.getItem('niconveApks') || '{}');
+            
+            if (Object.keys(uploadedFiles).length === 0) {
+                fileList.innerHTML = '<p style="color: #64748b; text-align: center; padding: 20px;">Belum ada file yang diupload</p>';
+                return;
+            }
+            
+            fileList.innerHTML = '';
+            
+            for (const [appKey, fileData] of Object.entries(uploadedFiles)) {
+                const size = (fileData.size / (1024 * 1024)).toFixed(2);
+                const appNameDisplay = appKey.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <div class="file-item-info">
+                        <div class="file-item-name">${appNameDisplay}</div>
+                        <div class="file-item-size">${fileData.name} • ${size} MB</div>
+                    </div>
+                    <div class="file-item-actions">
+                        <button class="btn-icon btn-delete" onclick="deleteFile('${appKey}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                fileList.appendChild(fileItem);
+            }
+        }
+
+        function deleteFile(appKey) {
+            if (confirm('Hapus file ini?')) {
+                delete uploadedFiles[appKey];
+                localStorage.setItem('niconveApks', JSON.stringify(uploadedFiles));
+                loadFiles();
+                showSuccess('File berhasil dihapus!');
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem('adminLoggedIn');
+            window.location.reload();
+        }
+
+        function showSuccess(message) {
+            const el = document.getElementById('successMessage');
+            el.textContent = message;
+            el.classList.add('show');
+            setTimeout(() => el.classList.remove('show'), 5000);
+        }
+
+        function showError(message) {
+            const el = document.getElementById('errorMessage');
+            el.textContent = message;
+            el.classList.add('show');
+            setTimeout(() => el.classList.remove('show'), 5000);
+        }
+
+        // Drag and drop
+        const fileUpload = document.getElementById('fileUpload');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            fileUpload.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            fileUpload.addEventListener(eventName, () => {
+                fileUpload.style.borderColor = '#667eea';
+                fileUpload.style.background = '#f1f5ff';
+            });
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            fileUpload.addEventListener(eventName, () => {
+                fileUpload.style.borderColor = '#cbd5e1';
+                fileUpload.style.background = '#f8fafc';
+            });
+        });
+
+        fileUpload.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            document.getElementById('apkFile').files = files;
+            
+            const event = new Event('change');
+            document.getElementById('apkFile').dispatchEvent(event);
+        });
+    </script>
+</body>
+</html>
