@@ -2,6 +2,17 @@
 // LEGENDARY EPIC ANIMATIONS & INTERACTIONS
 // ============================================
 
+// Device Performance Detection
+const isLowEndDevice = () => {
+    const cores = navigator.hardwareConcurrency || 2;
+    const memory = navigator.deviceMemory || 4;
+    const isMobile = window.innerWidth < 768;
+    
+    return cores < 4 || memory < 4 || isMobile;
+};
+
+const shouldReduceAnimations = isLowEndDevice();
+
 // Debounce function for performance
 function debounce(func, wait) {
     let timeout;
@@ -44,13 +55,28 @@ window.addEventListener('scroll', () => {
     }
 }, { passive: true });
 
-// Particle System - Optimized
+// Particle System - Device-Optimized
 function createParticles() {
     const container = document.getElementById('particleContainer');
     if (!container) return;
     
-    // Reduced particle count for better performance
-    const particleCount = window.innerWidth < 768 ? 15 : 30;
+    // Skip particles on very low-end devices
+    if (shouldReduceAnimations && window.innerWidth < 480) {
+        container.style.display = 'none';
+        return;
+    }
+    
+    // Adaptive particle count based on device capability
+    let particleCount;
+    if (window.innerWidth < 480) {
+        particleCount = 8;
+    } else if (window.innerWidth < 768) {
+        particleCount = 15;
+    } else if (shouldReduceAnimations) {
+        particleCount = 20;
+    } else {
+        particleCount = 30;
+    }
     
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');

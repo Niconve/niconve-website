@@ -21,6 +21,9 @@
     filter: blur(80px);
     opacity: 0.3;
     animation: floatOrb 20s ease-in-out infinite;
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 .apps-orb-1 {
@@ -68,7 +71,7 @@
     min-height: 90vh;
     display: flex;
     align-items: center;
-    padding: 180px 0 100px;
+    padding: 180px 0 120px;
     overflow: hidden;
     background: linear-gradient(135deg, #0a0f1a 0%, #1e293b 50%, #0f172a 100%);
 }
@@ -85,6 +88,7 @@
         radial-gradient(ellipse at 80% 70%, rgba(168, 85, 247, 0.15) 0%, transparent 50%);
     pointer-events: none;
     animation: gradientPulse 20s ease-in-out infinite;
+    will-change: opacity;
 }
 
 /* Apps Quick Stats */
@@ -94,6 +98,8 @@
     gap: 20px;
     max-width: 600px;
     margin: 40px auto 0;
+    position: relative;
+    z-index: 2;
 }
 
 .quick-stat {
@@ -106,6 +112,9 @@
     align-items: center;
     gap: 16px;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 .quick-stat:hover {
@@ -636,9 +645,10 @@
     }
 }
 
+/* Mobile */
 @media (max-width: 480px) {
     .apps-hero {
-        padding: 100px 0 50px;
+        padding: 100px 0 60px;
     }
     
     .apps-hero-title {
@@ -651,9 +661,14 @@
     }
     
     .apps-quick-stats {
-        flex-direction: column;
-        gap: 15px;
-        align-items: stretch;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin: 25px auto 30px;
+    }
+    
+    .quick-stat {
+        padding: 16px 12px;
+        backdrop-filter: blur(20px);
     }
     
     .stat-item {
@@ -671,7 +686,24 @@
     }
     
     .scroll-indicator {
-        margin-top: 40px;
+        margin-top: 30px;
+    }
+    
+    .apps-orb {
+        display: none;
+    }
+}
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .apps-orb,
+    .floating-app-icons .icon-float,
+    .hero-rings .ring {
+        animation: none;
+    }
+    
+    .apps-hero::before {
+        animation: none;
     }
 }
 
