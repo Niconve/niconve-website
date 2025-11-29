@@ -3,7 +3,8 @@
   "version": "2.0.0",
   "description": "Niconve Android Apps Platform - Premium Edition",
   "scripts": {
-    "build": "echo 'Build complete'",
+    "build": "echo 'Static site - no build needed'",
+    "vercel-build": "echo 'Static site - no build needed'",
     "deploy": "vercel --prod"
   },
   "dependencies": {
